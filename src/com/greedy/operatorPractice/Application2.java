@@ -13,6 +13,27 @@ public class Application2 {
 		 * ------ 출력 결과 --------
 		 * 청소년
 		 * */
+		
+		Application2 app2 = new Application2();
+		
+					int me = 19;
+				
+				String show = app2.meth(me);
+				
+				System.out.println(show);
+		
 	}
+	
+	
+	public String meth(int who) {
+		
+		return ( who <= 13)? "어린이" : ( who <= 19)? "청소년" : "성인";
+		
+		
+		
+		
+		
+	}
+	
 
 }
