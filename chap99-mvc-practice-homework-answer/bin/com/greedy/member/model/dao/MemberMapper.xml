@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.greedy.member.model.dao.MemberMapper">
+ 
+  <resultMap type="com.greedy.member.model.dto.MemberDTO" id="MemberResultMap">
+ 		<id property="memberNo" column="MEMBER_NO"/>
+ 		<result property="memberId" column="MEMBER_ID"/>
+ 		<result property="memberPwd" column="MEMBER_PWD"/>
+ 		<result property="memberName" column="MEMBER_NAME"/>
+ 		<result property="gender" column="GENDER"/>
+ 		<result property="email" column="EMAIL"/>
+ 		<result property="address" column="ADDRESS"/>
+ 		<result property="age" column="AGE"/>
+ 		<result property="enrollDate" column="ENROLL_DATE"/>
+ 	</resultMap> 
+
+
+
+	<insert id="insertMember">
+		INSERT
+		  INTO TBL_MEMBER M
+		(
+		  M.MEMBER_NO
+		, M.MEMBER_ID
+		, M.MEMBER_PWD
+		, M.MEMBER_NAME
+		, M.GENDER
+		, M.EMAIL
+		, M.PHONE
+		, M.ADDRESS
+		, M.AGE
+		, M.ENROLL_DATE
+		)
+		VALUES
+		(
+		  SEQ_MEMBER_NO.NEXTVAL
+		, #{ id }
+		, #{ pwd }
+		, #{ name }
+		, #{ gender }
+		, #{ email }
+		, #{ phone }
+		, #{ address }
+		, #{ age }
+		, SYSDATE
+		)
+	</insert>
+	
+	<select id="selectAllMember" resultMap="MemberResultMap">
+		SELECT
+		       M.*
+		  FROM TBL_MEMBER M
+	</select>
+	<select id="selectById" resultMap="MemberResultMap">
+		SELECT
+		       M.*
+		  FROM TBL_MEMBER M
+		 WHERE M.MEMBER_ID = #{ id }
+	</select>
+	<select id="selectByGender" resultMap="MemberResultMap">
+		SELECT
+		       M.*
+		  FROM TBL_MEMBER M
+		 WHERE M.GENDER = 'Y'
+	</select>
+	<update id="updatePassword">
+		UPDATE
+               TBL_MEMBER M
+           SET M.MEMBER_PWD = #{ pwd }
+         WHERE M.MEMBER_ID = #{ id }
+	</update>
+	<update id="updateEmail">
+ 		UPDATE
+               TBL_MEMBER M
+           SET M.EMAIL = #{ email }
+         WHERE M.MEMBER_ID = #{ id }
+	</update>
+	<update id="updatePhone">
+		UPDATE
+               TBL_MEMBER M
+           SET M.PHONE = #{ phone }
+         WHERE M.MEMBER_ID = #{ id }
+	</update>
+	<update id="updateAddress">
+		UPDATE
+               TBL_MEMBER M
+           SET M.ADDRESS = #{ adress }
+         WHERE M.MEMBER_ID = #{ id }
+	</update>
+	<delete id="deleteMember">
+        DELETE
+          FROM TBL_MEMBER M
+         WHERE M.MEMBER_ID = #{ id }
+	</delete>
+
+ </mapper>
